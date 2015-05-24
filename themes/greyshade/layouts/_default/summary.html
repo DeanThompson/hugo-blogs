@@ -1,0 +1,14 @@
+<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+		<div class="date">{{ partial "post/date.html" . }}</div>
+		<div class="tags">{{ partial "post/categories.html" . }}</div>
+		{{ if and (isset $.Site.Params "disqus_short_name") (isset $.Site.Params "disqus_show_comment_count") }}
+			<span class="comments"><a href="{{ .Permalink }}#disqus_thread">Comments</a></span>
+		{{ end }}
+	</div>
+	<h1 class="title" itemprop="name"><a href="{{ .Permalink }}" itemprop="url">{{ if isset $.Site.Params "titlecase" }}{{ .Title | title }}{{ else }}{{ .Title }}{{ end }}</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		{{ .Summary }}
+		{{ if .Truncated }}<a href="{{ .Permalink }}" class="more-link">{{ if isset $.Site.Params "excerpt_link" }}{{ index  $.Site.Params "excerpt_link" }}{{ else }}Read on →{{ end }}</a>{{ end }}
+	</div>
+</article>

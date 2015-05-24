@@ -1,0 +1,8 @@
+{{ partial "custom/navigation.html" }}
+{{ if isset .Site.Params "description" }}
+<section class="aboutme">
+  <p>
+    {{ index .Site.Params "description" }}
+  </p>
+</section>
+{{ end }}

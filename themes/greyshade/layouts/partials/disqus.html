@@ -1,0 +1,22 @@
+<!-- Load script if disquss comments are enabled and `page.comments` is either empty (index) or set to true -->
+{{ if and ($.Site.Params.disqus_short_name) (ne .Params.comments "false") }}
+<script type="text/javascript">
+      var disqus_shortname = '{{ $.Site.Params.disqus_short_name }}';
+      {{ if .Params.comments }}
+        // `page.comments` can be only be set to true on pages/posts, so we embed the comments here.
+        // var disqus_developer = 1;
+        var disqus_identifier = '{{ .Permalink }}';
+        var disqus_url = '{{ .Permalink }}';
+        var disqus_script = 'embed.js';
+      {{ else }}
+        // As `page.comments` is empty, we must be on the index page. 
+        var disqus_script = 'count.js';
+      {{ end }}
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+{{ end }}
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

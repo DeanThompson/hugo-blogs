@@ -1,0 +1,54 @@
+baseurl = "http://deanthompson.github.io"
+languageCode = "zh-CN"
+title = "李林克斯"
+
+[author]
+name = "Yangliang Li"
+# email will use for gravatar
+email = "yanglianglee@gmail.com"
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+
+[permalinks]
+post = "/posts/:year/:month/:slug"
+
+[params]
+# site description, will show under navigation
+description = ""
+email_md5 = "fe812f189c0479f8cc24d7bd3b76e46d"
+
+# RSS / Email (optional) subscription links (change if using something like Feedburner)
+subscribe_rss = "/index.xml"
+subscribe_email = ""
+
+# social links
+facebook_user = ""
+googleplus_user = ""
+twitter_user = ""
+github_user = "DeanThompson"
+coderwall_user = ""
+stackoverflow_user = "leon-young"
+stackoverflow_user_id = "1461780"
+linkedin_user = ""
+pinterest_user = ""
+delicious_user = ""
+pinboard_user = ""
+quora_user = ""
+instagram_user = ""
+behance_user = ""
+douban_user = "Touchthesky"
+
+# share links
+facebook_like = false
+twitter_tweet_button = false
+google_plus_one = false
+addthis_profile_id = ""
+
+# Disqus Comments
+disqus_short_name = "liyangliang"
+disqus_show_comment_count = true
+
+# google analytics
+google_analytics_tracking_id = "UA-45384257-1"
