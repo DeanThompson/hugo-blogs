@@ -21,6 +21,8 @@ GFW 早已经是臭名昭著，路人皆知的了，因为它的存在，使得�
 
 所以就选择了国外 VPS + Shadowsocks 的解决方案。
 
+<!--more-->
+
 ## 购买 VPS
 
 比较熟悉的是 Linode 和 DigitalOcean，两家的最低配置基本上差不多，但是 Linode 的价格（$10 每月）是后者的两倍。本来是想选择 DigitalOcean 的，但是在家折腾的时候，始终打不开 DigialOcean 的网站。。。于是就选择了 Linode 的 VPS。

@@ -20,6 +20,8 @@ def dict_slice(adict, start, end):
     return dict_slice
 ```
 
+<!--more-->
+
 ----
 **EDIT 2013-10-26 01:13**
 

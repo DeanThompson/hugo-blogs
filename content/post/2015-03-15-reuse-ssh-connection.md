@@ -20,6 +20,8 @@ Host *
     ControlPersist 600
 ```
 
+<!--more-->
+
 意思也很好理解：
 
 `Host *` 这一行表示下面这些配置和规则影响到的 host，`*` 表示所有的远程 host 都生效。如果要指定某个（些）特定的 host，可以使用类似 `Host *.example.com` 的配置。

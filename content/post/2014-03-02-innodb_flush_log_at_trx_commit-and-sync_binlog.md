@@ -19,6 +19,8 @@ slug = "innodb_flush_log_at_trx_commit-and-sync_binlog"
 
 上面说到的「最后 1s」并不是绝对的，有的时候会丢失更多数据。有时候由于调度的问题，每秒刷写（once-per-second flushing）并不能保证 100% 执行。对于一些数据一致性和完整性要求不高的应用，配置为 `2` 就足够了；如果为了最高性能，可以设置为 `0`。有些应用，如支付服务，对一致性和完整性要求很高，所以即使最慢，也最好设置为 `1`.
 
+<!--more-->
+
 ## 2. sync_binlog
 
 [sync_binlog](https://dev.MySQL.com/doc/refman/5.5/en/replication-options-binary-log.html#sysvar_sync_binlog) 是 MySQL 的二进制日志（binary log）同步到磁盘的频率。MySQL server 在 binary log 每写入 `sync_binlog` 次后，刷写到磁盘。

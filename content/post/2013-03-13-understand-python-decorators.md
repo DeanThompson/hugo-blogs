@@ -77,6 +77,8 @@ except NameError, e:
     #outputs : "name 'whisper' is not defined"*
 ```
 
+<!--more-->
+
 # 2. 函数引用（Functions references）
 
 OK，还在吧？！现在到了有趣的部分，你刚刚已经知道了，python的函数也是对象，因此：

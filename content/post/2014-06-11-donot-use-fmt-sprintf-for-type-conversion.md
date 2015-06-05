@@ -50,6 +50,8 @@ fmt.Sprintf taken: 2.995178ms
 strconv.FormatInt taken: 1.057318ms
 ```
 
+<!--more-->
+
 多次运行结果都类似，结论是：`fmt.Sprintf` 所需要的时间大约是 `strconv.FormatInt` 的 3 倍。
 
 同理，对于 `float64` 类型，推荐使用 `strconv.FormatFloat`。测试代码和上面类似，得到的结论是：`fmt.Sprintf` 所需要的时间大约是 `strconv.FormatFloat` 的 1.1 倍。效果没有整型明显，但依然更高效。

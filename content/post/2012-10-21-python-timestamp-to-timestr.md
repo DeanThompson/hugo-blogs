@@ -13,6 +13,8 @@ slug = "python-timestamp-to-timestr"
 
 > [为什么计算机时间要从1970年1月1日开始算起？](http://www.scriptlover.com/static/1071-%E6%97%A5%E6%9C%9F-%E6%97%B6%E9%97%B4-%E7%BC%96%E7%A8%8B-%E6%95%B0%E6%8D%AE%E5%BA%93)
 
+<!--more-->
+
 在Python里，时间戳可以通过 `time` 模块里的 `time()` 方法获得，比如:
 
 ```python
