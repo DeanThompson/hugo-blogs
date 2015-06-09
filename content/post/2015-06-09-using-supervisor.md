@@ -7,7 +7,7 @@ categories = ["python", "development", "tools"]
 tags = ["progress", "tools"]
 +++
 
-Supervisor [http://supervisord.org](http://supervisord.org) 是一个用 Python 写的进程管理工具，可以很方便的用来启动、重启、关闭进程（不仅仅是 Python 进程）。除了对单个进程的控制，还可以同时启动、关闭多个进程，比如很不幸的服务器出问题导致所有应用程序都被杀死，此时可以用 supervisor 同时启动所有应用程序而不是一个一个地敲命令启动。
+Supervisor ([http://supervisord.org](http://supervisord.org)) 是一个用 Python 写的进程管理工具，可以很方便的用来启动、重启、关闭进程（不仅仅是 Python 进程）。除了对单个进程的控制，还可以同时启动、关闭多个进程，比如很不幸的服务器出问题导致所有应用程序都被杀死，此时可以用 supervisor 同时启动所有应用程序而不是一个一个地敲命令启动。
 
 ## 安装
 
@@ -92,7 +92,7 @@ ps aux | grep supervisord
 files = /etc/supervisor/*.conf
 ```
 
-假设有个用 Python 和 Flask 框架编写的用户中心系统，取名 usercenter，用 gunicorn [http://gunicorn.org/](http://gunicorn.org/) 做 web 服务器。项目代码位于 `/home/leon/projects/usercenter`，gunicorn 配置文件为 `gunicorn.py`，WSGI callable 是 wsgi.py 里的 app 属性。所以直接在命令行启动的方式可能是这样的：
+假设有个用 Python 和 Flask 框架编写的用户中心系统，取名 usercenter，用 gunicorn ([http://gunicorn.org/](http://gunicorn.org/)) 做 web 服务器。项目代码位于 `/home/leon/projects/usercenter`，gunicorn 配置文件为 `gunicorn.py`，WSGI callable 是 wsgi.py 里的 app 属性。所以直接在命令行启动的方式可能是这样的：
 
 ```bash
 cd /home/leon/projects/usercenter
