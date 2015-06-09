@@ -61,7 +61,8 @@ def deploy():
         # 2. transfer
         d = os.path.join(remote_app_dir, "SomeProj")
         run("mkdir -p %s" % d)
-        put("SomeProj/*", "SomeProj")   # put 把本地文件传输到远程（看了下源码，是 FTP 协议）
+        # put 把本地文件传输到远程（ SFTP (SSH File Transfer Protocol) 协议）
+        put("SomeProj/*", "SomeProj")
 
         # 3. replace site_settings.py
         for subdir in ["apps", "admin", "core"]:
