@@ -39,7 +39,8 @@ from fabric.api import env, local, cd, lcd, put, run
 def prod():
     env.hosts = ["123.123.123.123"]
     env.user = "test"
-    # env.password = ""  # 如果这里写了密码，在发布时就不用输密码了
+    # env.password = ""  # 用密码登录
+    # env.key_filename = "/path/to/keyfile"     # 用 key file 登录（更安全）
 
 
 def pyclean():
