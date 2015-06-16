@@ -72,7 +72,7 @@ files = relative/directory/*.ini    ; 可以是 *.conf 或 *.ini
 我们把上面这部分配置保存到 /etc/supervisord.conf（或其他任意有权限访问的文件），然后启动 supervisord（通过 -c 选项指定配置文件路径，如果不指定会按照这个顺序查找配置文件：$CWD/supervisord.conf, $CWD/etc/supervisord.conf, /etc/supervisord.conf）：
 
 ```bash
-supervisrod -c /etc/supervisord.conf
+supervisord -c /etc/supervisord.conf
 ```
 
 查看 supervisord 是否在运行：
@@ -103,13 +103,13 @@ gunicorn -c gunicorn.py wsgi:app
 
 ```ini
 [program:usercenter]
-directory ＝ /home/leon/projects/usercenter ; 程序的启动目录
+directory = /home/leon/projects/usercenter ; 程序的启动目录
 command = gunicorn -c gunicorn.py wsgi:app  ; 启动命令，可以看出与手动在命令行启动的命令是一样的
 autostart = true     ; 在 supervisord 启动的时候也自动启动
 startsecs = 5        ; 启动 5 秒后没有异常退出，就当作已经正常启动了
 autorestart = true   ; 程序异常退出后自动重启
 startretries = 3     ; 启动失败自动重试次数，默认是 3
-user ＝ leon          ; 用哪个用户启动
+user = leon          ; 用哪个用户启动
 redirect_stderr = true  ; 把 stderr 重定向到 stdout，默认 false
 stdout_logfile_maxbytes = 20MB  ; stdout 日志文件大小，默认 50MB
 stdout_logfile_backups = 20     ; stdout 日志文件备份数
