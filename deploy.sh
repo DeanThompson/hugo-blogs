@@ -18,7 +18,13 @@ fi
 git commit -m "$msg"
 
 # Push source and build repos.
+echo -e "\033[0;32mCommit and push public repo...\033[0m"
 git push origin master
 
 # Come Back
 cd ..
+
+echo -e "\033[0;32mCommit and push blog repo...\033[0m"
+git add -A
+git commit -m "$msg"
+git push origin master
