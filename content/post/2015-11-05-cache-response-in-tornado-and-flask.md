@@ -27,12 +27,12 @@ slug = "cache-response-in-tornado-and-flask"
 
 ```python
 def cachable_get(kwargs, on_cache_missing, timeout=300):
-	key = make_key(kwargs)	# 计算出一个 key
-	value = cache.get(key)	# 查询缓存
-	if not value:
-		value = on_cache_missing(kwargs)	# 缓存没有命中，计算一次
-		cache.set(key, value, timeout)	# 把计算结果写入缓存
-	return value
+    key = make_key(kwargs)	# 计算出一个 key
+    value = cache.get(key)	# 查询缓存
+    if not value:
+        value = on_cache_missing(kwargs)	# 缓存没有命中，计算一次
+        cache.set(key, value, timeout)	# 把计算结果写入缓存
+    return value
 ```
 
 实际上也就是：先查缓存，如果有缓存没命中，再计算并把结果写入缓存。这种机制类似于中间件，或 Python 里的装饰器。
