@@ -29,7 +29,7 @@ goquery 暴露了两个结构体：`Document` 和 `Selection`. `Document` 表示
 * 请求 HTML 页面（如问题页面），调用 `NewDocumentFromResponse`
 * 请求 Ajax 接口，返回的 JSON 数据里是一些 HTML 片段，用 `NewDocumentFromReader`，其中 `r = strings.NewReader(html)`
 
-为了方便举例说明，下文采用这个定义：`var doc *goquery.Document`.
+为了方便举例说明，下文采用这个定义: `var doc *goquery.Document`.
 
 ### 查找到指定节点
 
