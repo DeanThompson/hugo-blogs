@@ -25,12 +25,16 @@
 	<link href="{{ .Site.BaseURL }}/favicon.jpeg" rel="shortcut icon">
 	<link href="{{ .Site.BaseURL }}/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="{{ .Site.BaseURL }}/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="{{ .Site.BaseURL }}/css/custom.css" media="screen, projection" rel="stylesheet" title="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
 	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
 	<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 	{{ partial "custom/head.html" . }}
     {{ partial "custom/highlight.html" . }}
-  {{ partial "google_analytics.html" . }}
+    {{ partial "google_analytics.html" . }}
+
+	<style media="screen">
+	article pre, article code {border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px 3px 3px 3px; -webkit-border-radius: 3px 3px 3px 3px; border: 0px solid #000000;}
+	article code {background: #f8f8f8;}
+	</style>
 </head>
