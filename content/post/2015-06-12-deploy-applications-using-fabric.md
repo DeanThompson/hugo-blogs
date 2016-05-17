@@ -62,7 +62,7 @@ fab hello
 
 可以看到有这样的输出：
 
-```text
+```
 Hello, world!
 
 Done.

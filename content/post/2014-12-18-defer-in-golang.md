@@ -66,7 +66,7 @@ func (c *cache) Set(k string, x interface{}, d time.Duration) {
 
 这是某一次测试的结果：
 
-```text
+```
 testing: warning: no tests to run
 PASS
 BenchmarkDeferredUnlock     10000000            134 ns/op

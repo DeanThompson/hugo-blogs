@@ -45,7 +45,7 @@ func main() {
 
 其中某一次运行结果：
 
-```text
+```
 fmt.Sprintf taken: 2.995178ms
 strconv.FormatInt taken: 1.057318ms
 ```
@@ -104,7 +104,7 @@ func main() {
 
 这个程序某一次的运行结果是：
 
-```text
+```
 result of fmt.Sprintf == hex.EncodeToString: true
 fmt.Sprintf taken: 10.285488ms
 hex.EncodeToString taken: 2.080457ms

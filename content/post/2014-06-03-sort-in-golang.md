@@ -81,12 +81,12 @@ import (
 )
 
 func main() {
-    a := []int{100, 5, 29, 3, 76} 
+    a := []int{100, 5, 29, 3, 76}
     fmt.Println(a)     // [100 5 29 3 76]
     sort.Ints(a)       // sort.Sort(IntSlice(a)) 的封装
     fmt.Println(a)     // [3 5 29 76 100]，默认的 Less() 实现的是升序
 
-    a = []int{100, 5, 29, 3, 76} 
+    a = []int{100, 5, 29, 3, 76}
     fmt.Println(a)     // [100 5 29 3 76]
     sort.Sort(sort.Reverse(sort.IntSlice(a)))
     fmt.Println(a)     // [100 76 29 5 3]
@@ -148,13 +148,13 @@ func main() {
 
 第一次输出结果是随机（每次运行结果都一样）生成的未排序的数据：
 
-```text
+```
 [<Item(1, 81)> <Item(2, 887)> <Item(3, 847)> <Item(4, 59)> <Item(5, 81)> <Item(6, 318)> <Item(7, 425)>]
 ```
 
 排序后：
 
-```text
+```
 [<Item(2, 887)> <Item(3, 847)> <Item(7, 425)> <Item(6, 318)> <Item(1, 81)> <Item(5, 81)> <Item(4, 59)>]
 ```
 
@@ -193,9 +193,8 @@ if __name__ == "__main__":
 
 某一次的执行结果：
 
-```text
-<Item(1, 819)> <Item(2, 959)> <Item(3, 812)> <Item(4, 193)> <Item(5, 408)> <Item(6, 884)> <Item(7, 849)> 
-
-<Item(2, 959)> <Item(6, 884)> <Item(7, 849)> <Item(1, 819)> <Item(3, 812)> <Item(5, 408)> <Item(4, 193)> 
 ```
+<Item(1, 819)> <Item(2, 959)> <Item(3, 812)> <Item(4, 193)> <Item(5, 408)> <Item(6, 884)> <Item(7, 849)>
 
+<Item(2, 959)> <Item(6, 884)> <Item(7, 849)> <Item(1, 819)> <Item(3, 812)> <Item(5, 408)> <Item(4, 193)>
+```
