@@ -118,7 +118,7 @@ $ celery worker --help
 from tasks import add
 
 add.delay(1, 2)
-add.apply_async(1, 2)
+add.apply_async(args=(1, 2))
 ```
 
 上面两种调用方式等价，`delay()` 方法是 `apply_async()` 方法的简写。这个调用会把 `add` 操作放入到队列里，然后立即返回一个 `AsyncResult` 对象。如果关心处理结果，需要给 `app` 配置 `CELERY_RESULT_BACKEND`，指定一个存储后端保存任务的返回值。
