@@ -1,5 +1,8 @@
 #!/bin/bash
 
-today=`date '+%Y-%m-%d'`
+year=`date '+%Y'`
+month=`date '+%m'`
 
-hugo new post/$today-$1
+mkdir -p $year/$month
+
+hugo new post/$year/$month/$1
