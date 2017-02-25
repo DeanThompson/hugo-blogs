@@ -136,7 +136,7 @@ def create_app():
 
 ```python
 from flask import current_app
-from celery.util.log import get_task_logger
+from celery.utils.log import get_task_logger
 
 from app import celery
 
@@ -149,7 +149,6 @@ def send_email(to, subject, content):
     subject = app.config['EMAIL_SUBJECT_PREFIX'] + subject
     logger.info('send message "%s" to %s', content, to)
     return do_send_email(to, subject, content)
-
 ```
 
 - app/views/account.py
