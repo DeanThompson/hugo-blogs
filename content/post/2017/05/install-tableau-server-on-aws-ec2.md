@@ -58,7 +58,7 @@ timeout 5
 
 echo %date% %time%: Uploading to S3
 
-aws s3 cp %Backuppath% s3://marspet-tableau-backup/ --recursive --exclude "*" --include "ts_backup-*.tsbak"
+aws s3 cp %Backuppath% s3://tableau-server-backup/ --recursive --exclude "*" --include "ts_backup-*.tsbak"
 
 echo %date% %time%: *** Housekeeping completed ***
 timeout 5
