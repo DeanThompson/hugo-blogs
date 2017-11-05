@@ -83,7 +83,7 @@ ps aux | grep supervisord
 
 ## program 配置
 
-上面我们已经把 supervisrod 运行起来了，现在可以添加我们要管理的进程的配置文件。可以把所有配置项都写到 supervisord.conf 文件里，但并不推荐这样做，而是通过 include 的方式把不同的程序（组）写到不同的配置文件里。
+上面我们已经把 supervisrod 运行起来了，现在可以添加我们要管理的进程的配置文件。这些配置可以都写到 supervisord.conf 文件里，如果应用程序很多，最好通过 include 的方式把不同的程序（组）写到不同的配置文件里。
 
 为了举例，我们新建一个目录 /etc/supervisor/ 用于存放这些配置文件，相应的，把 /etc/supervisord.conf 里 include 部分的的配置修改一下：
 
@@ -92,19 +92,19 @@ ps aux | grep supervisord
 files = /etc/supervisor/*.conf
 ```
 
-假设有个用 Python 和 Flask 框架编写的用户中心系统，取名 usercenter，用 gunicorn ([http://gunicorn.org/](http://gunicorn.org/)) 做 web 服务器。项目代码位于 `/home/leon/projects/usercenter`，gunicorn 配置文件为 `gunicorn.py`，WSGI callable 是 wsgi.py 里的 app 属性。所以直接在命令行启动的方式可能是这样的：
+假设有个用 Flask 开发的用户系统 usercenter, 生产环境使用 gunicorn 运行。项目代码位于 `/home/leon/projects/usercenter`，WSGI 对象位于 wsgi.py。在命令行启动的方式是这样的：
 
 ```bash
 cd /home/leon/projects/usercenter
-gunicorn -c gunicorn.py wsgi:app
+gunicorn -w 8 -b 0.0.0.0:17510 wsgi:app
 ```
 
-现在编写一份配置文件来管理这个进程（**需要注意：用 supervisord 管理时，gunicorn 的 daemon 选项需要设置为 False**）：
+对应的配置文件可能是：
 
 ```ini
 [program:usercenter]
 directory = /home/leon/projects/usercenter ; 程序的启动目录
-command = gunicorn -c gunicorn.py wsgi:app  ; 启动命令，可以看出与手动在命令行启动的命令是一样的
+command = gunicorn -w 8 -b 0.0.0.0:17510 wsgi:app  ; 启动命令
 autostart = true     ; 在 supervisord 启动的时候也自动启动
 startsecs = 5        ; 启动 5 秒后没有异常退出，就当作已经正常启动了
 autorestart = true   ; 程序异常退出后自动重启
@@ -115,12 +115,29 @@ stdout_logfile_maxbytes = 20MB  ; stdout 日志文件大小，默认 50MB
 stdout_logfile_backups = 20     ; stdout 日志文件备份数
 ; stdout 日志文件，需要注意当指定目录不存在时无法正常启动，所以需要手动创建目录（supervisord 会自动创建日志文件）
 stdout_logfile = /data/logs/usercenter_stdout.log
-
-; 可以通过 environment 来添加需要的环境变量，一种常见的用法是修改 PYTHONPATH
-; environment=PYTHONPATH=$PYTHONPATH:/path/to/somewhere
 ```
 
-一份配置文件至少需要一个 `[program:x]` 部分的配置，来告诉 supervisord 需要管理那个进程。`[program:x]` 语法中的 `x` 表示 program name，会在客户端（supervisorctl 或 web 界面）显示，在 supervisorctl 中通过这个值来对程序进行 start、restart、stop 等操作。
+其中 `[program:usercenter]` 中的 `usercenter` 是应用程序的唯一标识，不能重复。对该程序的所有操作（start, restart 等）都通过名字来实现。
+
+### Tips 1: Python 环境
+
+有两种方式指定程序使用的 Python 环境：
+
+1. `command` 使用绝对路径。假设使用 pyenv 来管理 Python 环境，上面例子中的 gunicorn 路径可以替换为 `/home/leon/.pyenv/versions/usercenter/bin/gunicorn`. 这种方式一目了然，推荐。
+2. 通过 `environment` 配置 `PYTHONPATH`. `environment=PYTHONPATH=$PYTHONPATH:/home/leon/.pyenv/versions/usercenter/bin/`. `environment` 这个配置项非常有用，可以用来给程序传入环境变量。
+
+### Tips 2: 后台进程
+
+Supervisor 只能管理在前台运行的程序，所以如果应用程序有后台运行的选项，需要关闭。
+
+### Tips 3: 子进程
+
+有时候用 Supervisor 托管的程序还会有子进程（如 Tornado），如果只杀死主进程，子进程就可能变成孤儿进程。通过这两项配置来确保所有子进程都能正确停止：
+
+```ini
+stopasgroup=true
+killasgroup=true
+```
 
 ## 使用 supervisorctl
 
@@ -148,7 +165,7 @@ $ supervisorctl stop usercenter
 $ supervisorctl start usercenter
 $ supervisorctl restart usercenter
 $ supervisorctl reread
-$ supervisorctl update 
+$ supervisorctl update
 ```
 
 ## 其它
@@ -160,4 +177,3 @@ $ supervisorctl update
 经常查看日志文件，包括 supervisord 的日志和各个 pragram 的日志文件，程序 crash 或抛出异常的信息一半会输出到 stderr，可以查看相应的日志文件来查找问题。
 
 Supervisor 有很丰富的功能，还有其他很多项配置，可以在官方文档获取更多信息：[http://supervisord.org/index.html](http://supervisord.org/index.html)
-
