@@ -66,8 +66,8 @@ ws.cell('D3').value = 4
 ws.cell(row=3, column=1).value = 6
  
 new_ws = wb.create_sheet(title='new_sheet')
-for row in range(100):
-    for col in range(10):
+for row in range(1, 100):
+    for col in range(1, 10):
         new_ws.cell(row=row, column=col).value = row+col
  
 # 最后一定要保存！
