@@ -35,6 +35,8 @@ FROM stv_recents
 WHERE stv_recents.status = 'Running'::bpchar;
 ```
 
+<!--more-->
+
 - 创建数据库时报错：`source database "template1" is being accessed by other users`
 
 原因：`template1` 数据库被其他 session 占用，锁住了。
