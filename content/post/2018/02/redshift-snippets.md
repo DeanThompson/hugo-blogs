@@ -19,7 +19,7 @@ SELECT * FROM stv_sessions;
 SELECT pg_terminate_backend(32281);
 ```
 
-即，调用 `pg_terminate_backend` 函数，传入 process_id。
+即，调用 `pg_terminate_backend` 函数，传入 process\_id。
 
 权限：普通用户只能终止自己的 session，超级用户能终止任意 session.
 
