@@ -19,3 +19,4 @@ slug = "jpush-api-go-client"
 欢迎使用，并 [反馈 issues](https://github.com/DeanThompson/jpush-api-go-client/issues) 或 [创建 pull request](https://github.com/DeanThompson/jpush-api-go-client/pulls).
 
 <!--more-->
+
