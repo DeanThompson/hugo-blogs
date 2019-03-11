@@ -4,14 +4,22 @@ draft = false
 title = "About Me"
 +++
 
-我叫李阳良，在互联网上使用过的 ID 包括 DeanThompson，leonyoung 等。我白天是个程序员，晚上会在家做饭和写代码。
+我叫李阳良，在互联网上使用过的 ID 包括 DeanThompson，leonyoung 等。1991 年出生，2013 年大学毕业于中山大学。
 
-1991 年出生，2013 年大学毕业。从毕业到现在（2015 年 8 月）一直在做 Web 后台开发，使用过的语言主要有 Python、Go 和 Ruby，其中对 Python 和 Go 比较熟悉。
+做过 Web 开发和大数据，主要技术栈：
 
-你可以在这些地方找到我：
+- 编程语言：熟悉 Python 和 Go，有多年生产环境使用经验
+- Web 框架：Python: 精通 Flask，熟悉 Tornado；Go: 熟悉标准库 net/http 和 Gin 框架
+- 数据库：熟悉 MySQL, TiDB, Redis, AWS Redshift, 用过 Cassandra, SQL Server
+- 大数据：熟悉 Hadoop, HDFS, Hive, Impala, ElasticSearch, ClickHouse, 了解 Spark, Kylin, Presto, Kafka
+- 公有云：熟悉 AWS, Azure, 用过阿里云
+- 操作系统：Linux (服务器), macOS (日常)
+- 其他工具：Git, Supervisord, Airflow, Prometheus, Grafana, Ansible, Docker, Kubernetes 等
 
-* [Github](https://github.com/DeanThompson)
-* [Stackoverflow](http://stackoverflow.com/users/1461780/leon-young)
+欢迎一起交流技术问题，你可以在这些地方找到我：
+
+* [GitHub](https://github.com/DeanThompson)
+* [Stack Overflow](http://stackoverflow.com/users/1461780/leon-young)
 * [知乎](http://www.zhihu.com/people/leonyoung)
 
 或者给我发邮件：
