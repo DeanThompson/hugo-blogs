@@ -1,5 +1,6 @@
 ---
 title: "聊聊幂等"
+slug: "idempotence"
 date: 2019-03-17T23:38:00+08:00
 draft: false
 categories: ["devops"]
