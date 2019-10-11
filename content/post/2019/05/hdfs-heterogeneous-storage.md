@@ -74,9 +74,30 @@ Mover 是 HDFS 的一个数据迁移工具，类似 Balancer. 区别在于，Mov
 
 使用方式: `hdfs mover -p <path>`，如果想一次性迁移所有数据，可把 path 指定为根路径，不过需要的时间也更长。
 
+## DataNode 内的数据平衡
+
+Balancer 可用于 DataNode 间数据平衡，但没法处理同一个 DataNode 内多块硬盘的分布不均衡情况。可以使用 `diskbalancer` 命令解决。
+
+首先要开启 `dfs.disk.balancer.enabled`，在 Cloudera Manager 上修改配置 **HDFS Service Advanced Configuration Snippet (Safety Valve) for hdfs-site.xml**，设置 `dfs.disk.balancer.enabled` 为 `true`，重启 HDFS 生效。
+
+接下来是三部曲：plan, execute, query.
+
+- Plan 生成迁移计划
+
+运行 `hdfs diskbalancer -plan <datanode-host>`，如 `hdfs diskbalancer -plan hadoop-dn-16`. 该命令会把计划配置以 JSON 文件输出到硬盘，具体路径看日志，以 `/system/diskbalancer/2016-Aug-19-18-04-01` 为例。
+
+- Execute 执行迁移
+
+`hdfs diskbalancer -execute /system/diskbalancer/2016-Aug-17-17-03-56/172.26.10.16.plan.json` 注意替换文件路径。
+
+- Query 查看进度
+
+`hdfs diskbalancer -query hadoop-dn-16` 查看进度，`PLAN_DONE` 说明平衡结束。可用 `df -h` 命令验证。
+
 ## 参考
 
 - [Archival Storage, SSD & Memory](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/ArchivalStorage.html)
 - [Enable support for heterogeneous storages in HDFS - DN as a collection of storages](https://issues.apache.org/jira/browse/HDFS-2832)
 - [HDFS异构存储](https://blog.csdn.net/androidlushangderen/article/details/51105876)
 - [Configuring Heterogeneous Storage in HDFS](https://www.cloudera.com/documentation/enterprise/5-14-x/topics/admin_heterogeneous_storage_oview.html)
+- [How-to: Use the New HDFS Intra-DataNode Disk Balancer in Apache Hadoop](https://blog.cloudera.com/how-to-use-the-new-hdfs-intra-datanode-disk-balancer-in-apache-hadoop/)
