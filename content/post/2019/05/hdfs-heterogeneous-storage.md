@@ -84,11 +84,11 @@ Balancer 可用于 DataNode 间数据平衡，但没法处理同一个 DataNode 
 
 - Plan 生成迁移计划
 
-运行 `hdfs diskbalancer -plan <datanode-host>`，如 `hdfs diskbalancer -plan hadoop-dn-16`. 该命令会把计划配置以 JSON 文件输出到硬盘，具体路径看日志，以 `/system/diskbalancer/2016-Aug-19-18-04-01` 为例。
+运行 `hdfs diskbalancer -plan <datanode-host>`，如 `hdfs diskbalancer -plan hadoop-dn-16`. 该命令会把计划配置以 JSON 文件输出到 HDFS 文件系统，具体路径看日志，以 `/system/diskbalancer/2019-Oct-13-22-49-45` 为例。
 
 - Execute 执行迁移
 
-`hdfs diskbalancer -execute /system/diskbalancer/2016-Aug-17-17-03-56/172.26.10.16.plan.json` 注意替换文件路径。
+`hdfs diskbalancer -execute /system/diskbalancer/2019-Oct-13-22-49-45/172.26.10.16.plan.json` 注意替换文件路径。
 
 - Query 查看进度
 
