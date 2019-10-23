@@ -116,3 +116,63 @@ roma	mda_vendor	0	4	10	10
 roma	mda_vendor	0	8	10	7
 roma	sku_bodytype	0	9	10	7
 ```
+
+- 查看数据库里的表和字段
+
+```sql
+SELECT
+  table_catalog,
+  table_schema,
+  table_name,
+  column_name,
+  data_type,
+  character_maximum_length,
+  column_default,
+  is_nullable
+FROM information_schema.columns
+WHERE table_schema NOT IN ('pg_catalog', 'information_schema')
+ORDER BY table_catalog, table_schema, table_name, column_name, ordinal_position;
+```
+
+- 查询持有锁定的会话
+
+```sql
+SELECT a.txn_owner,
+       a.txn_db,
+       a.xid,
+       a.pid,
+       a.txn_start,
+       a.lock_mode,
+       a.relation                                          AS table_id,
+       nvl(trim(c."name"), d.relname)                      AS tablename,
+       a.granted,
+       b.pid                                               AS blocking_pid,
+       datediff(S, a.txn_start, getdate()) / 86400 || ' days ' || datediff(S, a.txn_start, getdate()) % 86400 / 3600 ||
+       ' hrs ' || datediff(S, a.txn_start, getdate()) % 3600 / 60 || ' mins ' ||
+       datediff(S, a.txn_start, getdate()) % 60 || ' secs' AS txn_duration
+FROM svv_transactions a
+         LEFT JOIN (SELECT pid, relation, granted FROM pg_locks GROUP BY 1, 2, 3) b
+                   ON a.relation = b.relation AND a.granted = 'f' AND b.granted = 't'
+         LEFT JOIN (SELECT * FROM stv_tbl_perm WHERE slice = 0) c
+                   ON a.relation = c.id
+         LEFT JOIN pg_class d ON a.relation = d.oid
+WHERE a.relation IS NOT NULL;
+```
+
+查询结果样例：
+
+```text
+txn_owner | txn_db |   xid   |  pid  |         txn_start          |      lock_mode      | table_id | tablename | granted | blocking_pid |        txn_duration         | 
+----------+--------+---------+-------+----------------------------+---------------------+----------+-----------+---------+--------------+-----------------------------+
+ usr1     | db1    | 5559898 | 19813 | 2018-06-30 10:51:57.485722 | AccessExclusiveLock |   351959 | lineorder | t       |              | 0 days 0 hrs 0 mins 52 secs |
+ usr1     | db1    | 5559927 | 20450 | 2018-06-30 10:52:19.761199 | AccessShareLock     |   351959 | lineorder | f       |        19813 | 0 days 0 hrs 0 mins 30 secs |
+ usr1     | db1    | 5559898 | 19813 | 2018-06-30 10:51:57.485722 | AccessShareLock     |   351959 | lineorder | t       |              | 0 days 0 hrs 0 mins 52 secs |
+```
+* **granted = f**：说明该进程无法获得所需的锁定，因为另一个会话中的另一个事务正在持有该锁定
+* **blocking_pid**：显示正在持有该锁定的会话的进程 ID（此处 PID 19813 正在持有该锁定）
+
+要释放锁定，请等待持有锁定的事务完成，或者通过运行以下命令来手动终止会话：
+
+```sql
+SELECT pg_terminate_backend(19813);
+```
