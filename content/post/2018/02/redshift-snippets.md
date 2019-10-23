@@ -78,33 +78,40 @@ FROM leqi_orders LIMIT 10;
 - 查看表所占磁盘等信息
 
 ```sql
-SELECT BTRIM(pgdb.datname::character varying::text) AS "database",
-       BTRIM(a.name::character varying::text) AS "table",
-       (b.mbytes::numeric::numeric(18,0) / part.total::numeric::numeric(18,0) * 100::numeric::numeric(18,0))::numeric(5,2) AS pct_of_total,
+SELECT btrim(pgdb.datname::CHARACTER varying::text) AS "database",
+       btrim(a.name::CHARACTER varying::text) AS "table",
+       (b.mbytes::numeric::numeric(18, 0) / part.total::numeric::numeric(18, 0) * 100::numeric::numeric(18, 0))::numeric(5, 2) AS pct_of_total,
        a."rows",
        b.mbytes,
        b.unsorted_mbytes
-FROM stv_tbl_perm a
-  JOIN pg_database pgdb ON pgdb.oid = a.db_id::oid
-  JOIN (
-    SELECT stv_blocklist.tbl,
-           SUM(
-             CASE
-               WHEN stv_blocklist.unsorted = 1 OR stv_blocklist.unsorted IS NULL AND 1 IS NULL THEN 1
-               ELSE 0
-             END
-           ) AS unsorted_mbytes,
-           COUNT(*) AS mbytes
-    FROM stv_blocklist
-    GROUP BY stv_blocklist.tbl
-  ) b ON a.id = b.tbl
-  JOIN (
-    SELECT SUM(stv_partitions.capacity) AS total
-    FROM stv_partitions
-    WHERE stv_partitions.part_begin = 0
-  ) part ON 1 = 1
-WHERE a.slice = 0
-ORDER BY b.mbytes DESC, a.db_id, a.name;
+FROM
+  (SELECT id,
+          db_id,
+          name,
+          SUM("rows") AS "rows"
+   FROM stv_tbl_perm
+   GROUP BY id,
+            db_id,
+            name) a
+JOIN pg_database pgdb ON pgdb.oid = a.db_id::oid
+JOIN
+  (SELECT stv_blocklist.tbl,
+          sum(CASE
+                  WHEN stv_blocklist.unsorted = 1
+                       OR stv_blocklist.unsorted IS NULL
+                       AND 1 IS NULL THEN 1
+                  ELSE 0
+              END) AS unsorted_mbytes,
+          count(*) AS mbytes
+   FROM stv_blocklist
+   GROUP BY stv_blocklist.tbl) b ON a.id = b.tbl
+JOIN
+  (SELECT sum(stv_partitions.capacity) AS total
+   FROM stv_partitions
+   WHERE stv_partitions.part_begin = 0) part ON 1 = 1
+ORDER BY b.mbytes DESC,
+         a.db_id,
+         a.name
 ```
 
 查询结果样例：
