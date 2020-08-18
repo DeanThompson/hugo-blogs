@@ -78,3 +78,5 @@ CSV | 好 | 无 | 高 | 中等 | 无 | 低 | 关系型数据
 MessagePack | 差 | 无 | 较高 | 较小 | 无 | 低 | Web
 Thrift |差|有|很高|很小|有|高|RPC
 Protocol Buffers |差|有|很高|很小|有|高|RPC
+
+> 文末低调宣传一下，本文也发布在个人公众号: [https://mp.weixin.qq.com/s/ePh8jukhc8KcLXDVu6-CrA](https://mp.weixin.qq.com/s/ePh8jukhc8KcLXDVu6-CrA)
