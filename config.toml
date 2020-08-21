@@ -1,7 +1,8 @@
-baseurl = "https://liyangliang.me"
+baseUrl = "https://liyangliang.me"
 languageCode = "zh-CN"
 title = "李林克斯"
 theme = "greyshade"
+Paginate = 10
 
 [author]
 name = "Yangliang Li"

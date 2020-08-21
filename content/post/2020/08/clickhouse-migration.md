@@ -15,7 +15,7 @@ tags: ["bigdata", "database", "clickhouse"]
 
 迁移集群实际上就是要把所有数据库（system 除外）的表结构和数据完整的复制一遍。ClickHouse 官方和社区有一些现成的解决方案，也可以自己实现。
 
-<!-- more -->
+<!--more-->
 
 ### 拷贝数据目录
 
