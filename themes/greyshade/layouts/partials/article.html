@@ -1,3 +1,9 @@
 
     <h1 class="title" itemprop="name">{{ if isset .Site.Params "titlecase" }}{{ .Title | title }}{{ else }}{{ .Title }}{{ end }}</h1>
-	<div class="entry-content" itemprop="articleBody">{{ .Content }}</div>
+	<div class="entry-content" itemprop="articleBody">
+        {{ .Content }}
+        <h2 id="欢迎关注我的公众号">欢迎关注我的公众号</h2>
+        <p>
+            <a href="https://i.loli.net/2020/10/25/YnRdU7I3paSGxgP.png"><img src="https://i.loli.net/2020/10/25/YnRdU7I3paSGxgP.png" alt=""></a>
+        </p>
+    </div>

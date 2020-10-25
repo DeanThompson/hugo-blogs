@@ -8,10 +8,10 @@ title = "About Me"
 
 做过 Web 开发和大数据，主要技术栈：
 
-- 编程语言：熟悉 Python 和 Go，有多年生产环境使用经验
-- Web 框架：Python: 精通 Flask，熟悉 Tornado；Go: 熟悉标准库 net/http 和 Gin 框架
-- 数据库：熟悉 MySQL, TiDB, Redis, AWS Redshift, 用过 Cassandra, SQL Server
-- 大数据：熟悉 Hadoop, HDFS, Hive, Impala, ElasticSearch, ClickHouse, 了解 Spark, Kylin, Presto, Kafka
+- 编程语言：熟悉 Python 和 Go，有多年生产环境使用经验。
+- Web 框架：Python: 精通 Flask，熟悉 Tornado；Go: 熟悉标准库 net/http 和 Gin 框架。
+- 数据库：熟悉 MySQL, TiDB, Redis, AWS Redshift, 用过 Cassandra, SQL Server.
+- 大数据：熟悉 Hadoop, HDFS, Hive, Impala, ElasticSearch, ClickHouse, Spark, Kafka. 了解 Kylin, Presto.
 - 公有云：熟悉 AWS, Azure, 用过阿里云
 - 操作系统：Linux (服务器), macOS (日常)
 - 其他工具：Git, Supervisord, Airflow, Prometheus, Grafana, Ansible, Docker, Kubernetes 等
@@ -25,3 +25,4 @@ title = "About Me"
 或者给我发邮件：
 
 `yanglianglee <at> gmail <dot> com`
+
